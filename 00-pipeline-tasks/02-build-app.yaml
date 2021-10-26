@@ -1,0 +1,34 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-app
+  namespace: beer-rec-system
+spec:
+  workspaces:
+  - name: source
+  params:
+    - name: base_dir
+      description: build directory
+      type: string
+      default: "."
+    - name: url
+      type: string
+      default: ""
+  steps:
+    - name: install-dependencies-step
+      image: image-registry.openshift-image-registry.svc:5000/openshift/nodejs:14-ubi8
+      workingDir: /workspace/source
+      script: |
+        #!/usr/bin/env bash
+
+        url=https://github.com/beer-horoscope/beer-horoscope-ui.git
+
+        params_url=$(inputs.params.url)
+
+        if [[ "$url" == "$params_url" ]] 
+        then 
+          npm install
+          npm run build
+        else
+          echo "THIS IS NOT THE UI"
+        fi

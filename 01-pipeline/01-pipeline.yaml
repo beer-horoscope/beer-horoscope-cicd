@@ -36,6 +36,18 @@ spec:
       value: "true"
     - name: revision
       value: $(params.git-revision)
+  - name: build-app
+    runAfter:
+      - fetch-repository
+    taskRef:
+      kind: Task
+      name: build-app
+    workspaces:
+      - name: source
+        workspace: shared-workspace
+    params:
+    - name: url
+      value: $(params.git-url)
   - name: build-image
     taskRef:
       name: buildah
@@ -47,7 +59,7 @@ spec:
     - name: source
       workspace: shared-workspace
     runAfter:
-    - fetch-repository
+    - build-app
   - name: apply-manifests
     taskRef:
       name: apply-manifests

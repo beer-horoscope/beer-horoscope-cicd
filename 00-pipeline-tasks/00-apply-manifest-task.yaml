@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: apply-manifests
+  namespace: beer-rec-system
 spec:
   workspaces:
   - name: source
@@ -18,5 +19,5 @@ spec:
       args:
         - |-
           echo Applying manifests in $(inputs.params.manifest_dir) directory
-          oc apply -f $(inputs.params.manifest_dir)
+          oc apply -k $(inputs.params.manifest_dir)
           echo -----------------------------------
