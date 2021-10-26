@@ -25,7 +25,7 @@ spec:
 
         params_url=$(inputs.params.url)
 
-        if [[ "$url" == "$params_url" ]] 
+        if [[ "$url" == *"$params_url"* ]] 
         then 
           npm install
           npm run build
