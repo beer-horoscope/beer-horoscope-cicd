@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: Trigger
 metadata:
-  name: vote-trigger
+  name: beer-horoscope-trigger
 spec:
   serviceAccountName: pipeline
   interceptors:
@@ -15,9 +15,9 @@ spec:
         - name: "eventTypes"
           value: ["push"]
   bindings:
-    - ref: vote-app
+    - ref: beer-horoscope
   template:
-    ref: vote-app
+    ref: beer-horoscope
 ---
 apiVersion: v1
 kind: Secret

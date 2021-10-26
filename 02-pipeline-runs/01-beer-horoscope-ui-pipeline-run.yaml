@@ -7,11 +7,11 @@ spec:
     name: build-and-deploy
   params:
   - name: deployment-name
-    value: beer-rec-app
+    value: beer-horoscope-ui
   - name: git-url
     value: https://github.com/beer-horoscope/beer-horoscope-ui.git
   - name: IMAGE
-    value: image-registry.openshift-image-registry.svc:5000/beer-rec-system/beer-rec-app
+    value: image-registry.openshift-image-registry.svc:5000/beer-rec-system/beer-horoscope-ui
   workspaces:
   - name: shared-workspace
     volumeClaimTemplate:
